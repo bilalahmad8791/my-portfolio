@@ -2,13 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import smtplib
 from email.message import EmailMessage
+import os  # Add this line
 
 app = Flask(__name__)
 CORS(app)  # Allow frontend to call backend
 
 # Your Email Credentials (Use App Password)
-EMAIL_ADDRESS = "bilalahmad858657@gmail.com"
-EMAIL_PASSWORD = "aqir fhwo veam lkhh"  # App Password from Google
+EMAIL_ADDRESS = os.environ.get("EMAIL_USER")  # Get from environment
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASS")  # Get from environment
+
 
 @app.route("/send_email", methods=["POST"])
 def send_email():
